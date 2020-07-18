@@ -18,5 +18,7 @@ class ListingActivity : BaseActivity<ActivityListingBinding, ListingViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(listingToolbar)
+
+        this.viewModel.test()
     }
 }

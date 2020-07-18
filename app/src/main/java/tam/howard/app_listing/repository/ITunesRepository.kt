@@ -6,4 +6,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ITunesRepository @Inject constructor(private val iTunesApiProvider: ITunesApiProvider) {
+
+
+    suspend fun getTopFreeApplicationsList() = this.iTunesApiProvider.getTopFreeApplicationsList()
 }
