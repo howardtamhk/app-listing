@@ -7,7 +7,8 @@ import tam.howard.app_listing.model.ITunesItemDetail
 sealed class ListingRecyclerViewModel {
 
     @Serializable
-    class GrossingList(val list: ArrayList<ITunesItemDetail>) : ListingRecyclerViewModel()
+    data class GrossingList(val list: ArrayList<ITunesItemDetail>) : ListingRecyclerViewModel()
+
     @Serializable
-    class FreeApplicationItem(val detail: ITunesItemDetail) : ListingRecyclerViewModel()
+    data class FreeApplicationItem(val detail: ITunesItemDetail) : ListingRecyclerViewModel()
 }

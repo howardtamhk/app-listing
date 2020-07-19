@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="tam.howard.app_listing.model.ITunesItemDetail" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingEnd="@dimen/view_holder_grossing_list_padding_right">
+
+        <ImageView
+            android:id="@+id/imageViewGrossingItemIcon"
+            android:layout_width="@dimen/view_holder_grossing_list_item_icon_size"
+            android:layout_height="@dimen/view_holder_grossing_list_item_icon_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewGrossingItemTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_holder_grossing_list_item_margin_between"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{item.name}"
+            android:textSize="@dimen/view_holder_grossing_list_item_title_text_size"
+            app:layout_constraintEnd_toEndOf="@id/imageViewGrossingItemIcon"
+            app:layout_constraintStart_toStartOf="@id/imageViewGrossingItemIcon"
+            app:layout_constraintTop_toBottomOf="@id/imageViewGrossingItemIcon"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/textViewGrossingItemCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_holder_grossing_list_item_margin_between"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.genres[0]}"
+            android:textSize="@dimen/view_holder_grossing_list_item_title_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textViewGrossingItemTitle"
+            app:layout_constraintStart_toStartOf="@id/textViewGrossingItemTitle"
+            app:layout_constraintTop_toBottomOf="@id/textViewGrossingItemTitle"
+            app:layout_constraintVertical_bias="1"
+            tools:text="Category" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

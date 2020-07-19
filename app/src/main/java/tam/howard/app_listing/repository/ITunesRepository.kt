@@ -24,7 +24,7 @@ class ITunesRepository @Inject constructor(private val iTunesApiProvider: ITunes
         this.freeApplicationList.clear()
         this.grossingApplicationList.clear()
 
-        //todo: either error handling
+        //todo: either api error handling
         val freeApplicationResponse = this.getTopFreeApplicationsList()
         val grossingApplicationResponse = this.getTopGrossingApplicationsList()
 
@@ -38,9 +38,21 @@ class ITunesRepository @Inject constructor(private val iTunesApiProvider: ITunes
         offset: Int = 0,
         limit: Int = 10
     ): ArrayList<ITunesItemDetail> {
-        //todo: either error handling
+        //todo: either api error handling
+
+        val startIndex = offset * limit
+        var endIndex = (offset + 1) * limit
+        if (startIndex > endIndex || startIndex > this.freeApplicationList.size || startIndex < 0) {
+            return arrayListOf()
+        }
+
+        if (endIndex > this.freeApplicationList.size) {
+            endIndex = this.freeApplicationList.size
+        }
+
         val idList: List<String> =
-            this.grossingApplicationList.subList(offset, limit).mapNotNull { it.id.attributes?.id }
+            this.grossingApplicationList.subList(startIndex, endIndex)
+                .mapNotNull { it.id.attributes?.id }
         return this.iTunesApiProvider.getItemsDetail(idList.joinToString(",")).results
 
     }
@@ -49,9 +61,20 @@ class ITunesRepository @Inject constructor(private val iTunesApiProvider: ITunes
         offset: Int = 0,
         limit: Int = 10
     ): ArrayList<ITunesItemDetail> {
-        //todo: either error handling
+        //todo: either api error handling
+        val startIndex = offset * limit
+        var endIndex = (offset + 1) * limit
+        if (startIndex > endIndex || startIndex > this.freeApplicationList.size || startIndex < 0) {
+            return arrayListOf()
+        }
+
+        if (endIndex > this.freeApplicationList.size) {
+            endIndex = this.freeApplicationList.size
+        }
+
         val idList: List<String> =
-            this.freeApplicationList.subList(offset, limit).mapNotNull { it.id.attributes?.id }
+            this.freeApplicationList.subList(startIndex, endIndex)
+                .mapNotNull { it.id.attributes?.id }
         return this.iTunesApiProvider.getItemsDetail(idList.joinToString(",")).results
 
     }

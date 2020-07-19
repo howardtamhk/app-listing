@@ -35,7 +35,8 @@ object ApplicationModule {
                 Json(
                     configuration = JsonConfiguration(
                         ignoreUnknownKeys = true,
-                        prettyPrint = true
+                        prettyPrint = true,
+                        isLenient = true
                     )
                 ).asConverterFactory(
                     "application/json".toMediaType()

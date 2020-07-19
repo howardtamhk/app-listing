@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="tam.howard.app_listing.model.ITunesItemDetail" />
+
+        <variable
+            name="rank"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/view_holder_free_item_padding_horizontal"
+        android:paddingVertical="@dimen/view_holder_free_item_padding_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{rank}"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/view_holder_free_item_rank_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/viewHolderFreeItemIconStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.09" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/viewHolderFreeItemIconEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.27" />
+
+        <ImageView
+            android:id="@+id/imageViewFreeItemIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/viewHolderFreeItemIconEnd"
+            app:layout_constraintStart_toStartOf="@id/viewHolderFreeItemIconStart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/viewHolderFreeItemTextInfoStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <TextView
+            android:id="@+id/textViewFreeItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingTop="@dimen/view_holder_free_item_title_padding_top"
+            android:text="@{item.name}"
+            android:textSize="@dimen/view_holder_free_item_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/viewHolderFreeItemTextInfoStart"
+            app:layout_constraintTop_toTopOf="@id/imageViewFreeItemIcon"
+            tools:text="Google Map" />
+
+        <TextView
+            android:id="@+id/textViewFreeItemCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@{item.genres[0]}"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/view_holder_free_item_category_text_size"
+            app:layout_constraintBottom_toTopOf="@id/ratingBarFreeItem"
+            app:layout_constraintStart_toStartOf="@id/textViewFreeItemTitle"
+            app:layout_constraintTop_toBottomOf="@id/textViewFreeItemTitle"
+            tools:text="News" />
+
+        <RatingBar
+            android:id="@+id/ratingBarFreeItem"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:theme="@style/AppTheme.RatingBar"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewFreeItemIcon"
+            app:layout_constraintStart_toStartOf="@id/textViewFreeItemTitle"
+            tools:rating="1" />
+
+        <TextView
+            android:id="@+id/textViewFreeItemRatingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/view_holder_free_item_rating_count_padding_left"
+            android:maxLines="1"
+            android:text="@{item.userRatingCount}"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/view_holder_free_item_rating_count_text_size"
+            app:layout_constraintBottom_toBottomOf="@id/ratingBarFreeItem"
+            app:layout_constraintStart_toEndOf="@id/ratingBarFreeItem"
+            app:layout_constraintTop_toTopOf="@id/ratingBarFreeItem"
+            tools:text="(62)" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

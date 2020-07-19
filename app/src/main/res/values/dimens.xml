@@ -1,3 +1,18 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="view_holder_free_item_padding_vertical">10dp</dimen>
+    <dimen name="view_holder_free_item_padding_horizontal">10dp</dimen>
+    <dimen name="view_holder_free_item_rank_text_size">25sp</dimen>
+    <dimen name="view_holder_free_item_title_padding_top">5dp</dimen>
+    <dimen name="view_holder_free_item_title_text_size">15sp</dimen>
+    <dimen name="view_holder_free_item_category_text_size">12sp</dimen>
+    <dimen name="view_holder_free_item_rating_count_padding_left">5dp</dimen>
+    <dimen name="view_holder_free_item_rating_count_text_size">10sp</dimen>
+
+    <dimen name="view_holder_grossing_list_padding_vertical">10dp</dimen>
+    <dimen name="view_holder_grossing_list_padding_right">20dp</dimen>
+    <dimen name="view_holder_grossing_list_padding_left">5dp</dimen>
+    <dimen name="view_holder_grossing_list_title_text_size">20sp</dimen>
+    <dimen name="view_holder_grossing_list_item_icon_size">80dp</dimen>
+    <dimen name="view_holder_grossing_list_item_margin_between">10dp</dimen>
+    <dimen name="view_holder_grossing_list_item_title_text_size">15sp</dimen>
 </resources>

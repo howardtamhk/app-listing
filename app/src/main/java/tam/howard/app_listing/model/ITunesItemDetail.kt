@@ -10,9 +10,9 @@ data class ITunesItemDetail(
     @SerialName("trackCensoredName")
     val name: String = "",
     @SerialName("averageUserRating")
-    val rating: Double = 0.0,
+    val rating: Float = 0f,
     val genres: ArrayList<String> = arrayListOf(),
-    val userRatingCount: Int = 0
+    val userRatingCount: String = ""
 
 )
 
