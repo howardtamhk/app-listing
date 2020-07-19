@@ -1,10 +1,6 @@
 package tam.howard.app_listing.ui.listing
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import kotlinx.android.synthetic.main.activity_listing.*
 import tam.howard.app_listing.R
 import tam.howard.app_listing.base.BaseActivity
@@ -19,6 +15,6 @@ class ListingActivity : BaseActivity<ActivityListingBinding, ListingViewModel>(
         super.onCreate(savedInstanceState)
         setSupportActionBar(listingToolbar)
 
-        this.viewModel.test()
+        this.viewModel.reload()
     }
 }
