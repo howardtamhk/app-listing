@@ -6,10 +6,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import debounce
 import kotlinx.android.synthetic.main.activity_listing.*
 import kotlinx.android.synthetic.main.content_listing.*
-import kotlinx.coroutines.MainScope
 import tam.howard.app_listing.R
 import tam.howard.app_listing.base.BaseActivity
 import tam.howard.app_listing.databinding.ActivityListingBinding
@@ -61,14 +59,6 @@ class ListingActivity : BaseActivity<ActivityListingBinding, ListingViewModel>(
 
         this.viewModel.apiError.observe(this, Observer {
             Snackbar.make(coordinatorListing, R.string.api_error_msg, Snackbar.LENGTH_SHORT).show()
-        })
-
-        this.viewModel.searchValue.debounce(coroutineScope = MainScope()).observe(this, Observer {
-            if (it.isNullOrBlank()) {
-                this.viewModel.reload()
-            } else {
-                this.viewModel.search()
-            }
         })
     }
 

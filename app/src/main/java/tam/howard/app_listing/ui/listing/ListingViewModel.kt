@@ -1,7 +1,9 @@
 package tam.howard.app_listing.ui.listing
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
+import debounce
 import kotlinx.coroutines.launch
 import tam.howard.app_listing.base.BaseViewModel
 import tam.howard.app_listing.repository.ITunesRepository
@@ -18,12 +20,27 @@ class ListingViewModel @Inject constructor(private val iTunesRepository: ITunesR
     val apiError: MutableLiveData<Boolean> = MutableLiveData()
 
     val searchValue: MutableLiveData<String> = MutableLiveData()
+    val searchValueObserver = Observer<String> {
+        if (it.isNullOrBlank()) {
+            this.reload()
+        } else {
+            this.search()
+        }
+    }
 
     var offset: Int = 0
 
 
     init {
         this.reloadListing()
+
+        this.searchValue.debounce(coroutineScope = viewModelScope)
+            .observeForever(searchValueObserver)
+    }
+
+    override fun onCleared() {
+        this.searchValue.removeObserver(searchValueObserver)
+        super.onCleared()
     }
 
     fun reload() {
