@@ -78,4 +78,35 @@ class ITunesRepository @Inject constructor(private val iTunesApiProvider: ITunes
         return this.iTunesApiProvider.getItemsDetail(idList.joinToString(",")).results
 
     }
+
+
+    suspend fun search(
+        keyword: String, offset: Int = 0,
+        limit: Int = 10
+    ): ArrayList<ITunesItemDetail> {
+        val filteredList = arrayListOf(
+            *this.freeApplicationList.toTypedArray(),
+            *this.grossingApplicationList.toTypedArray()
+        ).filter {
+            it.name.label.contains(
+                keyword,
+                true
+            )
+        }
+        val startIndex = offset * limit
+        var endIndex = (offset + 1) * limit
+        if (startIndex > endIndex || startIndex > filteredList.size || startIndex < 0) {
+            return arrayListOf()
+        }
+
+        if (endIndex > filteredList.size) {
+            endIndex = filteredList.size
+        }
+
+        val idList: List<String> =
+            filteredList.subList(startIndex, endIndex)
+                .mapNotNull { it.id.attributes?.id }
+
+        return this.iTunesApiProvider.getItemsDetail(idList.joinToString(",")).results
+    }
 }

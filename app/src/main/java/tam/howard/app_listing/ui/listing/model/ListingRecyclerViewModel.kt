@@ -11,4 +11,7 @@ sealed class ListingRecyclerViewModel {
 
     @Serializable
     data class FreeApplicationItem(val detail: ITunesItemDetail) : ListingRecyclerViewModel()
+
+    @Serializable
+    data class SearchItem(val detail: ITunesItemDetail) : ListingRecyclerViewModel()
 }

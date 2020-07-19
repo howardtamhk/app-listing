@@ -26,7 +26,7 @@
             android:id="@+id/recyclerViewGrossingList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/view_holder_grossing_list_padding_left"
+            android:paddingStart="@dimen/view_holder_grossing_list_padding_left"
             android:clipToPadding="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewGrossingListTitle" />

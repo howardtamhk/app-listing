@@ -14,6 +14,8 @@
         android:id="@+id/coordinatorListing"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         tools:context="tam.howard.app_listing.ui.listing.ListingActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -24,7 +26,18 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/listingToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
+                android:layout_height="?attr/actionBarSize">
+
+                <EditText
+                    style="@style/AppTheme.SearchEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/search"
+                    android:hint="@string/search"
+                    android:inputType="text"
+                    android:paddingVertical="@dimen/search_edittext_padding_vertical"
+                    android:text="@={vm.searchValue}" />
+            </com.google.android.material.appbar.MaterialToolbar>
 
 
         </com.google.android.material.appbar.AppBarLayout>

@@ -14,6 +14,7 @@ import tam.howard.app_listing.R
 import tam.howard.app_listing.base.BaseViewHolder
 import tam.howard.app_listing.databinding.ViewHolderFreeAppItemBinding
 import tam.howard.app_listing.databinding.ViewHolderGrossingAppListingBinding
+import tam.howard.app_listing.databinding.ViewHolderSearchItemBinding
 import tam.howard.app_listing.ui.listing.model.ListingRecyclerViewModel
 
 class ListingAdapter(private val itemModels: ArrayList<ListingRecyclerViewModel> = arrayListOf()) :
@@ -35,7 +36,7 @@ class ListingAdapter(private val itemModels: ArrayList<ListingRecyclerViewModel>
                 )
                 return GrossingAppListingViewHolder(binding)
             }
-            else -> {
+            R.layout.view_holder_free_app_item -> {
                 val binding = DataBindingUtil.inflate<ViewHolderFreeAppItemBinding>(
                     LayoutInflater.from(parent.context),
                     R.layout.view_holder_free_app_item,
@@ -44,7 +45,15 @@ class ListingAdapter(private val itemModels: ArrayList<ListingRecyclerViewModel>
                 )
                 return FreeAppItemViewHolder(binding)
             }
-
+            else -> {
+                val binding = DataBindingUtil.inflate<ViewHolderSearchItemBinding>(
+                    LayoutInflater.from(parent.context),
+                    R.layout.view_holder_search_item,
+                    parent,
+                    false
+                )
+                return SearchItemViewHolder(binding)
+            }
         }
     }
 
@@ -60,6 +69,7 @@ class ListingAdapter(private val itemModels: ArrayList<ListingRecyclerViewModel>
         return when (itemModels[position]) {
             is ListingRecyclerViewModel.GrossingList -> R.layout.view_holder_grossing_app_listing
             is ListingRecyclerViewModel.FreeApplicationItem -> R.layout.view_holder_free_app_item
+            is ListingRecyclerViewModel.SearchItem -> R.layout.view_holder_search_item
         }
     }
 
@@ -104,6 +114,28 @@ class ListingAdapter(private val itemModels: ArrayList<ListingRecyclerViewModel>
             freeItem?.let {
                 binding.item = it.detail
                 binding.rank = index.toString()
+                binding.ratingBarFreeItem.rating = it.detail.rating
+                binding.executePendingBindings()
+
+                binding.imageViewFreeItemIcon.load(it.detail.iconUrl) {
+                    if (index % 2 == 1) {
+                        transformations(RoundedCornersTransformation(20f))
+                    } else {
+                        transformations(CircleCropTransformation())
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    class SearchItemViewHolder(binding: ViewHolderSearchItemBinding) :
+        ListingBaseViewHolder<ViewHolderSearchItemBinding>(binding) {
+        override fun bind(item: ListingRecyclerViewModel, index: Int) {
+            val searchItem = item as? ListingRecyclerViewModel.SearchItem
+            searchItem?.let {
+                binding.item = it.detail
                 binding.ratingBarFreeItem.rating = it.detail.rating
                 binding.executePendingBindings()
 

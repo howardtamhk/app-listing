@@ -6,6 +6,7 @@
 
     <color name="mainTextColor">#000000</color>
     <color name="secondaryTextColor">#8A8A8A</color>
+    <color name="white">#ffffff</color>
 
     <color name="ratingBarYellow">#F1A23A</color>
 </resources>

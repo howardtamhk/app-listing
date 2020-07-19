@@ -17,10 +17,25 @@ class ListingViewModel @Inject constructor(private val iTunesRepository: ITunesR
 
     val apiError: MutableLiveData<Boolean> = MutableLiveData()
 
+    val searchValue: MutableLiveData<String> = MutableLiveData()
+
     var offset: Int = 0
 
 
+    init {
+        this.reloadListing()
+    }
+
     fun reload() {
+        if (this.searchValue.value.isNullOrBlank()) {
+            this.reloadListing()
+        } else {
+            this.search()
+        }
+    }
+
+
+    private fun reloadListing() {
         viewModelScope.launch {
             this@ListingViewModel.isLoading.value = true
             val currentOffset = offset
@@ -52,7 +67,42 @@ class ListingViewModel @Inject constructor(private val iTunesRepository: ITunesR
         }
     }
 
-    fun loadNextFreeAppListingPage() {
+    fun search() {
+        viewModelScope.launch {
+            this@ListingViewModel.isLoading.value = true
+            val currentOffset = offset
+            offset = 0
+
+            try {
+                val result =
+                    this@ListingViewModel.iTunesRepository.search(
+                        this@ListingViewModel.searchValue.value ?: ""
+                    )
+
+                this@ListingViewModel.listingRecyclerViewModelListLiveData.value =
+                    arrayListOf(
+                        *result.map { ListingRecyclerViewModel.SearchItem(it) }
+                            .toTypedArray()
+                    )
+            } catch (e: Exception) {
+                offset = currentOffset
+                this@ListingViewModel.apiError.value = true
+            } finally {
+                this@ListingViewModel.isLoading.value = false
+
+            }
+        }
+    }
+
+    fun loadNextPage() {
+        if (this.searchValue.value.isNullOrBlank()) {
+            this.loadNextFreeAppListingPage()
+        } else {
+            this.loadNextSearchPage()
+        }
+    }
+
+    private fun loadNextFreeAppListingPage() {
         if (this.isLoading.value == true) {
             return
         }
@@ -79,6 +129,33 @@ class ListingViewModel @Inject constructor(private val iTunesRepository: ITunesR
             }
 
 
+        }
+    }
+
+    private fun loadNextSearchPage() {
+        viewModelScope.launch {
+            this@ListingViewModel.isLoading.value = true
+            offset++
+
+            try {
+                val result =
+                    this@ListingViewModel.iTunesRepository.search(
+                        this@ListingViewModel.searchValue.value ?: "",
+                        offset = offset
+                    )
+
+                this@ListingViewModel.listingRecyclerViewModelListLiveData.value =
+                    arrayListOf(
+                        *result.map { ListingRecyclerViewModel.FreeApplicationItem(it) }
+                            .toTypedArray()
+                    )
+            } catch (e: Exception) {
+                offset--
+                this@ListingViewModel.apiError.value = true
+            } finally {
+                this@ListingViewModel.isLoading.value = false
+
+            }
         }
     }
 }
