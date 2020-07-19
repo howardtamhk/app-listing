@@ -91,6 +91,12 @@ class ITunesRepository @Inject constructor(private val iTunesApiProvider: ITunes
             it.name.label.contains(
                 keyword,
                 true
+            ) || it.category.attributes?.label?.contains(
+                keyword,
+                true
+            ) == true || it.artist.label.contains(keyword, true) || it.summary.label.contains(
+                keyword,
+                true
             )
         }
         val startIndex = offset * limit

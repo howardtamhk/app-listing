@@ -146,7 +146,9 @@ class ListingViewModel @Inject constructor(private val iTunesRepository: ITunesR
 
                 this@ListingViewModel.listingRecyclerViewModelListLiveData.value =
                     arrayListOf(
-                        *result.map { ListingRecyclerViewModel.FreeApplicationItem(it) }
+                        *this@ListingViewModel.listingRecyclerViewModelListLiveData.value?.toTypedArray()
+                            ?: arrayOf(),
+                        *result.map { ListingRecyclerViewModel.SearchItem(it) }
                             .toTypedArray()
                     )
             } catch (e: Exception) {

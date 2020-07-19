@@ -12,7 +12,8 @@ data class ITunesListingItem(
     val title: ITunesListingItemInnerModel,
     val id: ITunesListingItemInnerModel,
     @SerialName("im:artist")
-    val artist: ITunesListingItemInnerModel
+    val artist: ITunesListingItemInnerModel,
+    val category: ITunesListingItemInnerModel
 
 )
 
