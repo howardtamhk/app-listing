@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import coil.api.load
+import coil.transform.RoundedCornersTransformation
 import tam.howard.app_listing.R
 import tam.howard.app_listing.base.BaseViewHolder
 import tam.howard.app_listing.databinding.ViewHolderGrossingListItemBinding
@@ -35,7 +36,9 @@ class GrossingListAdapter(private val itemDetails: ArrayList<ITunesItemDetail>) 
 
         fun bind(item: ITunesItemDetail) {
             binding.item = item
-            binding.imageViewGrossingItemIcon.load(item.iconUrl)
+            binding.imageViewGrossingItemIcon.load(item.iconUrl) {
+                transformations(RoundedCornersTransformation(20f))
+            }
         }
     }
 

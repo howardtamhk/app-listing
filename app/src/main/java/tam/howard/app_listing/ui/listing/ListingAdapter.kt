@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import coil.api.load
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import tam.howard.app_listing.R
 import tam.howard.app_listing.base.BaseViewHolder
 import tam.howard.app_listing.databinding.ViewHolderFreeAppItemBinding
@@ -105,7 +107,13 @@ class ListingAdapter(private val itemModels: ArrayList<ListingRecyclerViewModel>
                 binding.ratingBarFreeItem.rating = it.detail.rating
                 binding.executePendingBindings()
 
-                binding.imageViewFreeItemIcon.load(it.detail.iconUrl)
+                binding.imageViewFreeItemIcon.load(it.detail.iconUrl) {
+                    if (index % 2 == 1) {
+                        transformations(RoundedCornersTransformation(20f))
+                    } else {
+                        transformations(CircleCropTransformation())
+                    }
+                }
             }
 
         }

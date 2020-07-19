@@ -63,16 +63,23 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.3" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/viewHolderFreeItemTextInfoEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.98" />
+
         <TextView
             android:id="@+id/textViewFreeItemTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingTop="@dimen/view_holder_free_item_title_padding_top"
             android:text="@{item.name}"
             android:textSize="@dimen/view_holder_free_item_title_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/viewHolderFreeItemTextInfoEnd"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/viewHolderFreeItemTextInfoStart"
             app:layout_constraintTop_toTopOf="@id/imageViewFreeItemIcon"
